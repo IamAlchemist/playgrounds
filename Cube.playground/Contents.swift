@@ -72,5 +72,21 @@ var transform5 = CATransform3DMakeTranslation(0, 0, -100)
 transform5 = CATransform3DRotate(transform5, CGFloat(M_PI), 0, 1, 0)
 face5.view.layer.transform = transform5
 
+var perspectiveRotateY : CGFloat = 0
+class PanGestureHandler : NSObject {
+    func panned(gesture : UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .Changed:
+            perspectiveRotateY += 0.02
+            
+        default:
+            break
+        }
+    }
+}
+
+let panGestureHandler = PanGestureHandler()
+let gesture = UIPanGestureRecognizer(target: panGestureHandler, action: #selector(PanGestureHandler.panned(_:)))
+
 XCPlaygroundPage.currentPage.liveView = rootView
 
